@@ -3,6 +3,8 @@ package io.github.dudursn.dscatalog.controllers;
 import io.github.dudursn.dscatalog.dtos.CategoryDTO;
 import io.github.dudursn.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -21,6 +23,12 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> findAll(){
         List<CategoryDTO> list = service.findAll();
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value="/pagination")
+    public ResponseEntity<Page<CategoryDTO>> findAllPagination(Pageable pageable){
+        Page<CategoryDTO> list = service.findAllPagination(pageable);
         return ResponseEntity.ok(list);
     }
 
