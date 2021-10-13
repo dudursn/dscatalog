@@ -14,7 +14,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest request){
-        
+
         StandardError standardError = new StandardError();
 
         standardError.setTimestamp(Instant.now());
