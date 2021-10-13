@@ -3,14 +3,12 @@ package io.github.dudursn.dscatalog.services;
 import io.github.dudursn.dscatalog.dtos.CategoryDTO;
 import io.github.dudursn.dscatalog.entities.Category;
 import io.github.dudursn.dscatalog.repositories.CategoryRepository;
-import io.github.dudursn.dscatalog.services.exceptions.EntityNotFoundException;
+import io.github.dudursn.dscatalog.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,7 +37,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id){
         Optional<Category> obj = repository.findById(id);
-        Category entity = obj.orElseThrow( () -> new EntityNotFoundException("Data not found"));
+        Category entity = obj.orElseThrow( () -> new ResourceNotFoundException("Data not found"));
         return new CategoryDTO(entity);
     }
 
@@ -49,5 +47,18 @@ public class CategoryService {
         entity.setName(dto.getName());
         entity = repository.save(entity);
         return new CategoryDTO(entity);
+    }
+
+    @Transactional
+    public CategoryDTO update(CategoryDTO dto, Long id) {
+        try {
+            Category entity = repository.getById(id);
+            entity.setId(id);
+            entity.setName(dto.getName());
+            entity = repository.save(entity);
+            return new CategoryDTO(entity);
+        }catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException("Id "+ id +" not found");
+        }
     }
 }

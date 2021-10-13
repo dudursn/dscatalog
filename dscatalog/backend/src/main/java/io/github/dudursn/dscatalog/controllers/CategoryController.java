@@ -42,4 +42,11 @@ public class CategoryController {
         //Resource's Status Created => 201
         return ResponseEntity.created(uri).body(dto);
     }
+
+    @PutMapping(value = "/save/{id}")
+    public ResponseEntity<CategoryDTO> update(@PathVariable("id") long id, @RequestBody CategoryDTO dto){
+
+        dto = service.update(dto, id);
+        return ResponseEntity.ok(dto);
+    }
 }
