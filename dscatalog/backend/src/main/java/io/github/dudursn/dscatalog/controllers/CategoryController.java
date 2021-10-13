@@ -49,4 +49,12 @@ public class CategoryController {
         dto = service.update(dto, id);
         return ResponseEntity.ok(dto);
     }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Void> update(@PathVariable("id") long id){
+
+        service.delete(id);
+        //Method delete => no body and status code 204
+        return ResponseEntity.noContent().build();
+    }
 }
