@@ -1,5 +1,6 @@
 package io.github.dudursn.dscatalog.controllers;
 
+
 import io.github.dudursn.dscatalog.dtos.CategoryDTO;
 import io.github.dudursn.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,8 +20,10 @@ public class CategoryController {
     @Autowired
     private CategoryService service;
 
+
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> findAll(){
+
         List<CategoryDTO> list = service.findAll();
         return ResponseEntity.ok(list);
     }
@@ -46,6 +48,8 @@ public class CategoryController {
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
+
+        //webHookClient.execute(ResponseEntity.created(uri).body(dto).toString());
 
         //Resource's Status Created => 201
         return ResponseEntity.created(uri).body(dto);
