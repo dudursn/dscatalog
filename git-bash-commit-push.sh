@@ -1,4 +1,4 @@
-commit_name="Product entity, SQL script"
+commit_name="Images"
 
 echo "Inserindo modificações no github"
 echo "Nome do commit: ${commit_name}"
