@@ -57,6 +57,7 @@ public class Category implements Serializable {
     @PrePersist
     public void prePersist(){
         this.createdAt = Instant.now();
+        this.updatedAt = this.createdAt;
     }
 
     /* Antes de atualizar, faz isso*/
@@ -76,5 +77,10 @@ public class Category implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString(){
+        return "Category [id="+id+", name="+name+"]";
     }
 }

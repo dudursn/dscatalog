@@ -7,14 +7,20 @@ import java.awt.*;
 @Service
 public class DiscordWebHookClient {
 
+    private final String urlWebHook = "https://discord.com/api/webhooks/"+
+             "898625534471340112/bCNpFtUE4nF7NpsGXKSqAP10IsNoD04ToGv8L-DlQA7okb5XP8Qg0-sQr2pepwKWQDeS";
+
+    private final String avatarUrl = "https://dudursn.github.io/images/eu.jpg";
+
+    private final String userName = "Captain Edu";
+
     public void execute(String msg){
 
-        DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/" +
-                "898625534471340112/bCNpFtUE4nF7NpsGXKSqAP10IsNoD04ToGv8L-DlQA7okb5XP8Qg0-sQr2pepwKWQDeS");
+        DiscordWebhook webhook = new DiscordWebhook(this.urlWebHook);
 
         webhook.setContent(msg);
-        webhook.setAvatarUrl("https://dudursn.github.io/images/eu.jpg");
-        webhook.setUsername("Captain Edu");
+        webhook.setAvatarUrl(this.avatarUrl);
+        webhook.setUsername(this.userName);
         webhook.setTts(true);
         /*
         webhook.addEmbed(new DiscordWebhook.EmbedObject()
