@@ -1,7 +1,10 @@
 package io.github.dudursn.dscatalog.services;
 
+import io.github.dudursn.dscatalog.dtos.CategoryDTO;
 import io.github.dudursn.dscatalog.dtos.ProductDTO;
+import io.github.dudursn.dscatalog.entities.Category;
 import io.github.dudursn.dscatalog.entities.Product;
+import io.github.dudursn.dscatalog.repositories.CategoryRepository;
 import io.github.dudursn.dscatalog.repositories.ProductRepository;
 import io.github.dudursn.dscatalog.services.discord.DiscordWebHookClient;
 import io.github.dudursn.dscatalog.services.exceptions.DataBaseException;
@@ -25,6 +28,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository repository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private DiscordWebHookClient webHookClient;
@@ -64,11 +70,7 @@ public class ProductService {
     public ProductDTO save(ProductDTO dto) {
         Product entity = new Product();
 
-        entity.setName(dto.getName());
-        entity.setDescription(dto.getDescription());
-        entity.setPrice(dto.getPrice());
-        entity.setImgUrl(dto.getImgUrl());
-        entity.setDate(dto.getDate());
+        entity = this.copyDtoToEntity(dto, entity);
 
         entity = repository.save(entity);
         webHookClient.execute(
@@ -80,15 +82,10 @@ public class ProductService {
     public ProductDTO update(ProductDTO dto, Long id) {
 
         try {
+
             Product entity = repository.getById(id);
-
+            entity = this.copyDtoToEntity(dto, entity);
             entity.setId(id);
-            entity.setName(dto.getName());
-            entity.setDescription(dto.getDescription());
-            entity.setPrice(dto.getPrice());
-            entity.setImgUrl(dto.getImgUrl());
-            entity.setDate(dto.getDate());
-
             entity = repository.save(entity);
 
             webHookClient.execute(
@@ -128,5 +125,22 @@ public class ProductService {
         //Cada elemento da lista original é convertida para a classe alvo DTO e
         // depois a stream é convertida para lista
         return result.map(data -> new ProductDTO(data));
+    }
+
+    private Product copyDtoToEntity(ProductDTO dto, Product entity) {
+
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setPrice(dto.getPrice());
+        entity.setImgUrl(dto.getImgUrl());
+        entity.setDate(dto.getDate());
+
+        entity.getCategories().clear();
+        for(CategoryDTO catDto : dto.getCategories()) {
+            Category cat = categoryRepository.getById(catDto.getId());
+            entity.getCategories().add(cat);
+        };
+
+        return entity;
     }
 }

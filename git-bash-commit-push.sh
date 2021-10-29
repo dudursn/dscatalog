@@ -1,8 +1,7 @@
-commit_name="Product repository, service, controller, GET ok"
 
 echo "Inserindo modificações no github"
-echo "Nome do commit: ${commit_name}"
-read -p "Deseja continuar? [n/S]: "  answer
+read -p "Informe o nome do commit: " commit_name
+read -p "COMMIT NAME: '${commit_name}'. Deseja continuar? [n/S]: "  answer
 if [ "$answer" = "S" ] || [ "$answer" = "s" ]; then
     git add .
     git commit -m "${commit_name}"
