@@ -1,4 +1,4 @@
-commit_name="Images"
+commit_name="Product repository, service, controller, GET ok"
 
 echo "Inserindo modificações no github"
 echo "Nome do commit: ${commit_name}"
