@@ -1,12 +1,12 @@
 package io.github.dudursn.dscatalog.services;
 
+import io.github.dudursn.dscatalog.constants.TypeMessage;
 import io.github.dudursn.dscatalog.dtos.CategoryDTO;
 import io.github.dudursn.dscatalog.dtos.ProductDTO;
 import io.github.dudursn.dscatalog.entities.Category;
 import io.github.dudursn.dscatalog.entities.Product;
 import io.github.dudursn.dscatalog.repositories.CategoryRepository;
 import io.github.dudursn.dscatalog.repositories.ProductRepository;
-import io.github.dudursn.dscatalog.services.discord.DiscordWebHookClient;
 import io.github.dudursn.dscatalog.services.exceptions.DataBaseException;
 import io.github.dudursn.dscatalog.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,7 +32,7 @@ public class ProductService {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    private DiscordWebHookClient webHookClient;
+    private NotifyDiscordService notifyDiscordService;
 
     //private Gson gson = new Gson();
 
@@ -73,8 +72,7 @@ public class ProductService {
         entity = this.copyDtoToEntity(dto, entity);
 
         entity = repository.save(entity);
-        webHookClient.execute(
-                "Insert new Product Id: " + entity.getId() + ", Time: " + Instant.now().toString());
+        notifyDiscordService.notify(TypeMessage.INSERT, entity, "");
         return new ProductDTO(entity);
     }
 
@@ -88,13 +86,11 @@ public class ProductService {
             entity.setId(id);
             entity = repository.save(entity);
 
-            webHookClient.execute(
-                    "Update Product Id: " + id + ", Time: " + Instant.now().toString());
+            notifyDiscordService.notify(TypeMessage.UPDATE, entity, "");
 
             return new ProductDTO(entity);
         }catch (EntityNotFoundException e){
-            webHookClient.execute(
-                    "Error - Update Product Id: " + id + ", Time: " + Instant.now().toString());
+            notifyDiscordService.notify(TypeMessage.ERROR, id, "Update: " + e.getMessage() );
             throw new ResourceNotFoundException("Id "+ id +" not found");
         }
     }
@@ -104,16 +100,14 @@ public class ProductService {
         try {
 
             repository.deleteById(id);
-            webHookClient.execute(
-                    "Delete Product Id: " + id + ", Time: " + Instant.now().toString());
+            notifyDiscordService.notify(TypeMessage.DELETE, id, "");
 
         }catch (EmptyResultDataAccessException e){
-            webHookClient.execute(
-                    "Error - Delete Product Id: " + id + ", Time: " + Instant.now().toString()+ ", Not found");
+
+            notifyDiscordService.notify(TypeMessage.ERROR, id, "Delete: " + e.getMessage() );
             throw new ResourceNotFoundException("Id "+ id +" not found");
         }catch (DataIntegrityViolationException e){
-            webHookClient.execute(
-                    "Error - Delete Product Id: " + id + ", Time: " + Instant.now().toString()+ ", Integrity violation");
+            notifyDiscordService.notify(TypeMessage.ERROR, id, "Delete: " + e.getMessage() );
             throw new DataBaseException("Integrity violation");
         }
     }

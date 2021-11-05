@@ -2,25 +2,23 @@ package io.github.dudursn.dscatalog.services.discord;
 
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 
-@Service
-public class DiscordWebHookClient {
+public final class DiscordWebHookClient {
 
-    private final String urlWebHook = "https://discord.com/api/webhooks/"+
+    private final static String urlWebHook = "https://discord.com/api/webhooks/"+
              "898625534471340112/bCNpFtUE4nF7NpsGXKSqAP10IsNoD04ToGv8L-DlQA7okb5XP8Qg0-sQr2pepwKWQDeS";
 
-    private final String avatarUrl = "https://dudursn.github.io/images/eu.jpg";
+    private final static String avatarUrl = "https://dudursn.github.io/images/eu.jpg";
 
-    private final String userName = "Captain Edu";
+    private final static String userName = "Captain Edu";
 
-    public void execute(String msg){
+    public static void execute(String msg){
 
-        DiscordWebhook webhook = new DiscordWebhook(this.urlWebHook);
+        DiscordWebhook webhook = new DiscordWebhook(urlWebHook);
 
         webhook.setContent(msg);
-        webhook.setAvatarUrl(this.avatarUrl);
-        webhook.setUsername(this.userName);
+        webhook.setAvatarUrl(avatarUrl);
+        webhook.setUsername(userName);
         webhook.setTts(true);
         /*
         webhook.addEmbed(new DiscordWebhook.EmbedObject()
