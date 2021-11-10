@@ -1,6 +1,5 @@
 package io.github.dudursn.dscatalog.services;
 
-import com.google.gson.Gson;
 import io.github.dudursn.dscatalog.constants.TypeMessage;
 import io.github.dudursn.dscatalog.dtos.CategoryDTO;
 import io.github.dudursn.dscatalog.entities.Category;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
