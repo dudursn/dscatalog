@@ -17,9 +17,9 @@ public class ProductRepositoryTests {
     @Test
     public void deleteProductWhenIdExists(){
 
-        long existingId = 1L;
-        repository.deleteById(existingId);
-        Optional<Product> result = repository.findById(existingId);
+        long id = 1L;
+        repository.deleteById(id);
+        Optional<Product> result = repository.findById(id);
         Assertions.assertFalse(result.isPresent());
     }
 }
