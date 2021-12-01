@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 public final class DiscordWebHookClient {
 
-    private final static String urlWebHook = "https://discord.com/api/webhooks/"+
-             "898625534471340112/bCNpFtUE4nF7NpsGXKSqAP10IsNoD04ToGv8L-DlQA7okb5XP8Qg0-sQr2pepwKWQDeS";
+    private final static String urlWebHook = "https://discord.com/api/webhooks/912134816785399828/" +
+            "3dIU3zZgcQ9QgPlOiBojY3ixdB9CYQTpzE6nKCZ6Pt3YOI90FHvAkVj8-aiLNGgUIigl";
 
     private final static String avatarUrl = "https://dudursn.github.io/images/eu.jpg";
 
