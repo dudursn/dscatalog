@@ -6,6 +6,7 @@ import io.github.dudursn.dscatalog.entities.Category;
 import io.github.dudursn.dscatalog.entities.Product;
 import io.github.dudursn.dscatalog.services.NotifyDiscordService;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,37 +17,44 @@ public class NotifyDiscordTest {
     @Autowired
     NotifyDiscordService notifyDiscordService;
 
+    private Product product;
+    private Category category;
+    private long idTesteDeleteUpdate;
+
+    @BeforeEach
+    void setUp() throws Exception {
+
+        //Arrange
+        product = new Product(100L, "name", "String description", 1.73, "String imgUrl");
+        category = new Category(555L, "Test");
+        idTesteDeleteUpdate = 2L;
+    }
+
     @Test
     public void eventNotifyBotDiscordInsert(){
-        //Arrange
-        Product p = new Product(100L, "name", "String description", 1.73, "String imgUrl");
-        Category c = new Category(555L, "Test");
 
         //Action
-        notifyDiscordService.notify(TypeMessage.INSERT, c, "");
+        notifyDiscordService.notify(TypeMessage.INSERT, category, "");
     }
 
     @Test
     public void eventNotifyBotDiscordUpdate(){
-        //Arrange
-        Product p = new Product(100L, "name", "String description", 1.73, "String imgUrl");
-        Category c = new Category(555L, "Test");
 
         //Action
-        notifyDiscordService.notify(TypeMessage.UPDATE, c, "");
+        notifyDiscordService.notify(TypeMessage.UPDATE, category, "");
     }
 
     @Test
     public void eventNotifyBotDiscordDelete(){
 
         //Action
-        notifyDiscordService.notify(TypeMessage.DELETE, 2L, "");
+        notifyDiscordService.notify(TypeMessage.DELETE, idTesteDeleteUpdate, "");
     }
 
     @Test
     public void eventNotifyBotDiscordError(){
 
         //Action
-        notifyDiscordService.notify(TypeMessage.ERROR, 2L, "UPDATE ERROR");
+        notifyDiscordService.notify(TypeMessage.ERROR, idTesteDeleteUpdate, "UPDATE ERROR");
     }
 }
