@@ -5,20 +5,20 @@ import org.springframework.stereotype.Service;
 
 public final class DiscordWebHookClient {
 
-    private final static String urlWebHook = "https://discord.com/api/webhooks/912134816785399828/" +
+    private final static String URL_WEBHOOK = "https://discord.com/api/webhooks/912134816785399828/" +
             "3dIU3zZgcQ9QgPlOiBojY3ixdB9CYQTpzE6nKCZ6Pt3YOI90FHvAkVj8-aiLNGgUIigl";
 
-    private final static String avatarUrl = "https://dudursn.github.io/images/eu.jpg";
+    private final static String AVATAR_URL = "https://dudursn.github.io/images/eu.jpg";
 
-    private final static String userName = "Captain Edu";
+    private final static String USERNAME = "Captain Edu";
 
     public static void execute(String msg){
 
-        DiscordWebhook webhook = new DiscordWebhook(urlWebHook);
+        DiscordWebhook webhook = new DiscordWebhook(URL_WEBHOOK);
 
         webhook.setContent(msg);
-        webhook.setAvatarUrl(avatarUrl);
-        webhook.setUsername(userName);
+        webhook.setAvatarUrl(AVATAR_URL);
+        webhook.setUsername(USERNAME);
         webhook.setTts(true);
         /*
         webhook.addEmbed(new DiscordWebhook.EmbedObject()

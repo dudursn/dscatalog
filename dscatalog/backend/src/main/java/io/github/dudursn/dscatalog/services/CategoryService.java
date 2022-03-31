@@ -33,10 +33,11 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public List<CategoryDTO> findAll(){
         List<Category> result = repository.findAll();
+        /*Lambda */
         return result.stream().map(data -> new CategoryDTO(data)).collect(Collectors.toList());
 
         /*
-        Modo Trabalhoso
+        Modo Tradicional
             List<CategoryDTO> listDTO = new ArrayList();
             for (Category cat : result){
                 listDTO.add(new CategoryDTO(cat));

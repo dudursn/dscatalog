@@ -121,6 +121,17 @@ public class ProductService {
         return result.map(data -> new ProductDTO(data));
     }
 
+    @Transactional(readOnly = true)
+    public long getTotalCountProduct(){
+        try{
+
+            return repository.count();
+        }catch (Exception e){
+
+            throw new ResourceNotFoundException("Table isn't exist");
+        }
+    }
+
     private Product copyDtoToEntity(ProductDTO dto, Product entity) {
 
         entity.setName(dto.getName());

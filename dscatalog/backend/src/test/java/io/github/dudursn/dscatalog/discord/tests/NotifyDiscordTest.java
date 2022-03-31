@@ -4,6 +4,8 @@ package io.github.dudursn.dscatalog.discord.tests;
 import io.github.dudursn.dscatalog.constants.TypeMessage;
 import io.github.dudursn.dscatalog.entities.Category;
 import io.github.dudursn.dscatalog.entities.Product;
+import io.github.dudursn.dscatalog.factories.CategoryFactoryTests;
+import io.github.dudursn.dscatalog.factories.ProductFactoryTests;
 import io.github.dudursn.dscatalog.services.NotifyDiscordService;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,8 +27,8 @@ public class NotifyDiscordTest {
     void setUp() throws Exception {
 
         //Arrange
-        product = new Product(100L, "name", "String description", 1.73, "String imgUrl");
-        category = new Category(555L, "Test");
+        product = ProductFactoryTests.createProduct();
+        category = CategoryFactoryTests.createCategory();
         idTesteDeleteUpdate = 2L;
     }
 
