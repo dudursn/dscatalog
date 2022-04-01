@@ -28,15 +28,28 @@ public class ProductRepositoryTests {
         System.out.println("Running Junit Test Suite.");
         id = 1L;
         nonExistingId = 1000L;
+
     }
 
 
     @Test
-    public void deleteProductWhenIdExists(){
+    public void deleteShouldDeleteProductWhenIdExists(){
 
         repository.deleteById(id);
         Optional<Product> result = repository.findById(id);
         Assertions.assertFalse(result.isPresent());
+    }
+
+    @Test
+    public void findByIdShouldReturnProductWhenIdExists(){
+        Optional<Product> result = repository.findById(id);
+        Assertions.assertNotEquals(result, Optional.empty());
+    }
+
+    @Test
+    public void findByIdShouldReturnEmptyWhenIdNotExists(){
+        Optional<Product> result = repository.findById(nonExistingId);
+        Assertions.assertEquals(result, Optional.empty());
     }
 
     @Test
