@@ -1,7 +1,5 @@
 package io.github.dudursn.dscatalog.services.discord;
 
-import org.springframework.stereotype.Service;
-
 
 public final class DiscordWebHookClient {
 
@@ -19,7 +17,8 @@ public final class DiscordWebHookClient {
         webhook.setContent(msg);
         webhook.setAvatarUrl(AVATAR_URL);
         webhook.setUsername(USERNAME);
-        webhook.setTts(true);
+        /*TTs - text to speech*/
+        webhook.setTts(false);
         /*
         webhook.addEmbed(new DiscordWebhook.EmbedObject()
                 .setTitle("Title")

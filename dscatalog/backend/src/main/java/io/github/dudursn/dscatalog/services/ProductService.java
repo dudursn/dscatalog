@@ -97,7 +97,7 @@ public class ProductService {
 
     public void delete(long id) {
 
-        try {
+        try{
 
             repository.deleteById(id);
             notifyDiscordService.notify(TypeMessage.DELETE, id, "");

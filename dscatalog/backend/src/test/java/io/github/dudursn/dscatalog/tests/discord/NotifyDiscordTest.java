@@ -1,11 +1,11 @@
-package io.github.dudursn.dscatalog.discord.tests;
+package io.github.dudursn.dscatalog.tests.discord;
 
 
 import io.github.dudursn.dscatalog.constants.TypeMessage;
 import io.github.dudursn.dscatalog.entities.Category;
 import io.github.dudursn.dscatalog.entities.Product;
-import io.github.dudursn.dscatalog.factories.CategoryFactoryTests;
-import io.github.dudursn.dscatalog.factories.ProductFactoryTests;
+import io.github.dudursn.dscatalog.tests.factories.CategoryFactoryTests;
+import io.github.dudursn.dscatalog.tests.factories.ProductFactoryTests;
 import io.github.dudursn.dscatalog.services.NotifyDiscordService;
 
 import org.junit.jupiter.api.BeforeEach;

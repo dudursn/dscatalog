@@ -1,8 +1,9 @@
-package io.github.dudursn.dscatalog.repositories;
+package io.github.dudursn.dscatalog.tests.repositories;
 
 import io.github.dudursn.dscatalog.dtos.ProductDTO;
 import io.github.dudursn.dscatalog.entities.Product;
-import io.github.dudursn.dscatalog.factories.ProductFactoryTests;
+import io.github.dudursn.dscatalog.repositories.ProductRepository;
+import io.github.dudursn.dscatalog.tests.factories.ProductFactoryTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

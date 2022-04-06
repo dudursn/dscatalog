@@ -5,7 +5,6 @@ import io.github.dudursn.dscatalog.services.discord.message.DiscordMessageDelete
 import io.github.dudursn.dscatalog.services.discord.message.DiscordMessageError;
 import io.github.dudursn.dscatalog.services.discord.message.DiscordMessageInsert;
 import io.github.dudursn.dscatalog.services.discord.message.DiscordMessageUpdate;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;

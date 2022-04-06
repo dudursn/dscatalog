@@ -1,4 +1,4 @@
-package io.github.dudursn.dscatalog.factories;
+package io.github.dudursn.dscatalog.tests.factories;
 
 import io.github.dudursn.dscatalog.dtos.ProductDTO;
 import io.github.dudursn.dscatalog.entities.Product;

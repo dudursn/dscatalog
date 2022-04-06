@@ -1,6 +1,5 @@
 package io.github.dudursn.dscatalog.repositories;
 
-import io.github.dudursn.dscatalog.entities.Category;
 import io.github.dudursn.dscatalog.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
