@@ -16,7 +16,7 @@ No que diz respeito à Banco de Dados, foi utilizado:
 - o H2 para banco de teste
 - o PostgreSQL para banco de desenvolvimento e produção
 
-E durante o projeto aproveitei e acrescentei mais features:
+E durante o projeto e acrescentei mais features:
 
 Utilização do shell para automatizar os commits
 ```
