@@ -52,6 +52,7 @@ public class ProductServiceTests {
             service.delete(existingId);
         });
 
+        // used to check that certain behavior happened.
         Mockito.verify(repository).deleteById(existingId);
         Mockito.verify(notifyDiscordService).notify(TypeMessage.DELETE, existingId, "");
         /*
@@ -67,6 +68,7 @@ public class ProductServiceTests {
             service.delete(notExistingId);
         });
 
+        // used to check that certain behavior happened.
         Mockito.verify(repository).deleteById(notExistingId);
 
     }
