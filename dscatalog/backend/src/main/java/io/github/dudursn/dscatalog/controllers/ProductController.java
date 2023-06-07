@@ -70,7 +70,7 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<Void> update(@PathVariable("id") long id){
+    public ResponseEntity<Void> delete(@PathVariable("id") long id){
 
         service.delete(id);
         //Method delete => no body and status code 204
