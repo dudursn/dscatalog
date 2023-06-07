@@ -44,3 +44,11 @@ Utilização do discord através dos webhooks para notificar:
 - logs do sistema
 
 <img src="./dscatalog/images/project-logs-discord.png" width="640" height="480"/>
+
+Utilização do sonar para analisar a qualidade do código 
+
+Baixei a imagem do sonar no docker e configurei. Gerei um token e rodei o comando
+
+    mvn clean verify sonar:sonar   -Dsonar.projectKey=teste-sonar-api   -Dsonar.projectName='teste-sonar-api'   -Dsonar.host.url=http://localhost:9000   -Dsonar.token=[TOKEN]
+
+<img src="./dscatalog/images/sonar.png" width="640" height="480"/>
