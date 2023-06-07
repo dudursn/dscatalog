@@ -91,25 +91,24 @@ public class CategoryControllerTest {
         BDDMockito.verify(categoryService).delete(ArgumentMatchers.anyLong());
     }
 
-//    @Test
-//    public void returnsOkAndNoContentWhenUpdateACategory() throws Exception {
-//      /*Configuração dos comportamentos no mockito para impedir a execução
-//        do método para fazer o teste de unidade*/
-//        BDDMockito.given(categoryService.update(ArgumentMatchers.any(), ArgumentMatchers.anyLong())).willAnswer(
-//                invocation -> invocation.getArgument(0)
-//        );
-//
-//        //Simula uma requisição para um endpoint assim como a resposta retornada.
-//        ResultActions response = mockMvc.perform(put("/categories/save/" + dto.getId())
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(""));
-//
-//        //Verifica a resposta esperada
-//        response.andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-//                .andExpect(MockMvcResultMatchers.content().string(""));
-//
-//        //Usado para checar se o comportamento aconteceu
-//        BDDMockito.verify(categoryService).update(ArgumentMatchers.any(), ArgumentMatchers.anyLong());
-//    }
+    @Test
+    public void returnsOkWhenUpdateACategory() throws Exception {
+      /*Configuração dos comportamentos no mockito para impedir a execução
+        do método para fazer o teste de unidade*/
+        BDDMockito.given(categoryService.update(ArgumentMatchers.any(), ArgumentMatchers.anyLong())).willAnswer(
+                invocation -> invocation.getArgument(0)
+        );
+
+        //Simula uma requisição para um endpoint assim como a resposta retornada.
+        ResultActions response = mockMvc.perform(put("/categories/save/" + dto.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(dto)));
+
+        //Verifica a resposta esperada
+        response.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+
+        //Usado para checar se o comportamento aconteceu
+        BDDMockito.verify(categoryService).update(ArgumentMatchers.any(), ArgumentMatchers.anyLong());
+    }
 }
